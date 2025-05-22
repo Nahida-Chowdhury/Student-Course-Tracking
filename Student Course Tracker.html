@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Course Tracker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-start py-10">
+
+  <!-- Form -->
+  <form id="data-form" class="bg-white p-6 rounded shadow-md w-full max-w-md space-y-4 mb-10">
+    <h2 class="text-xl font-bold">Add Student Course</h2>
+    
+    <input type="text" id="student" placeholder="Student Name" required class="w-full border px-3 py-2 rounded" />
+    <input type="text" id="course" placeholder="Course Title" required class="w-full border px-3 py-2 rounded" />
+    <input type="text" id="code" placeholder="Course Code" required class="w-full border px-3 py-2 rounded" />
+    
+    <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Add Course</button>
+  </form>
+
+  <!-- Table -->
+  <div class="w-full max-w-4xl">
+    <table class="w-full bg-white shadow rounded">
+      <thead class="bg-gray-200 text-left">
+        <tr>
+          <th class="px-4 py-2">Student Name</th>
+          <th class="px-4 py-2">Course Title</th>
+          <th class="px-4 py-2">Course Code</th>
+        </tr>
+      </thead>
+      <tbody id="course-table-body">
+        <!-- New rows will be inserted here -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const form = document.getElementById('data-form');
+    const tableBody = document.getElementById('course-table-body');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Get values
+      const student = document.getElementById('student').value.trim();
+      const course = document.getElementById('course').value.trim();
+      const code = document.getElementById('code').value.trim();
+
+      // Create a new row
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="px-4 py-2 border">${student}</td>
+        <td class="px-4 py-2 border">${course}</td>
+        <td class="px-4 py-2 border">${code}</td>
+      `;
+
+      // Append to table
+      tableBody.appendChild(tr);
+
+      // Reset the form
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
